@@ -1,0 +1,5 @@
+{
+  "name": "PySon Converter",
+  "description": "A Motherduck-styled Python-to-JSON converter with fast, local text processing.",
+  "requestFramePermissions": []
+}
