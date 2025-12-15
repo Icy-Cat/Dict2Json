@@ -21,6 +21,12 @@ export default function Head() {
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="language" content="English" />
       <meta name="author" content="PySon" />
+      <meta name="application-name" content="PySon Converter" />
+      <meta name="referrer" content="no-referrer-when-downgrade" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="apple-mobile-web-app-title" content="PySon" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />
@@ -34,9 +40,17 @@ export default function Head() {
         content="Convert Python dictionaries and lists to formatted JSON instantly in your browser. No server uploads, 100% privacy."
       />
       <meta property="og:site_name" content="PySon Converter" />
+      <meta property="og:image" content="https://pyson.app/og-image.png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:alt" content="PySon Converter - Python to JSON tool" />
+      <meta property="og:locale" content="en_US" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@pyson_converter" />
+      <meta name="twitter:creator" content="@pyson_converter" />
       <meta
         name="twitter:title"
         content="PySon Converter | Secure Client-Side Python to JSON Tool"
@@ -45,6 +59,8 @@ export default function Head() {
         name="twitter:description"
         content="Convert Python dictionaries and lists to formatted JSON instantly in your browser. No server uploads, 100% privacy."
       />
+      <meta name="twitter:image" content="https://pyson.app/og-image.png" />
+      <meta name="twitter:image:alt" content="PySon Converter - Python to JSON tool" />
 
       {/* Favicon */}
       <link
@@ -76,13 +92,25 @@ export default function Head() {
         }}
       />
 
-      {/* Fonts */}
+      {/* DNS Prefetch and Preconnect for Performance */}
+      <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+      {/* Fonts with display=swap for better loading */}
       <link
         href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet"
       />
+
+      {/* Preload critical resources */}
+      <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
+
+      {/* Additional SEO and Performance */}
+      <link rel="alternate" hrefLang="en" href="https://pyson.app/" />
+      <link rel="alternate" hrefLang="zh" href="https://pyson.app/" />
+      <link rel="alternate" hrefLang="x-default" href="https://pyson.app/" />
     </>
   );
 }

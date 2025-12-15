@@ -51,7 +51,11 @@ const Logo = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className="shrink-0"
+    aria-label="PySon Logo"
+    role="img"
   >
+    <title>PySon Converter Logo</title>
+    <desc>Python to JSON converter tool logo</desc>
     <rect
       x="0.5"
       y="0.5"
@@ -678,6 +682,7 @@ const App = () => {
             href="/"
             className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             title={t("nav.home")}
+            aria-label="PySon Converter - Python to JSON tool"
           >
             <Logo />
             <div className="flex flex-col">
@@ -762,10 +767,10 @@ const App = () => {
           {/* Toolbar */}
           <div className="h-12 flex items-center justify-between px-4 border-b border-duck-border bg-duck-bg shrink-0">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-mono font-bold text-duck-text uppercase flex items-center gap-2 px-2 py-1 bg-white border border-duck-border rounded-duck">
+              <h2 className="text-sm font-mono font-bold text-duck-text uppercase flex items-center gap-2 px-2 py-1 bg-white border border-duck-border rounded-duck">
                 <Code2 size={14} />
                 {t("input.title")}
-              </span>
+              </h2>
             </div>
             <div className="flex items-center gap-2">
               {!input && (
@@ -789,6 +794,7 @@ const App = () => {
               value={input}
               onChange={handleInputChange}
               placeholder={t("input.placeholder")}
+              aria-label="Python code input"
               className="w-full h-full bg-white p-6 font-mono text-sm text-duck-text resize-none focus:outline-none leading-relaxed selection:bg-duck-yellow selection:text-black"
               spellCheck={false}
             />
@@ -816,10 +822,10 @@ const App = () => {
           {/* Toolbar */}
           <div className="h-12 flex items-center justify-between px-4 border-b border-duck-border bg-duck-bg shrink-0">
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-sm font-mono font-bold text-duck-text uppercase px-2 py-1 bg-white border border-duck-border rounded-duck">
+              <h2 className="flex items-center gap-2 text-sm font-mono font-bold text-duck-text uppercase px-2 py-1 bg-white border border-duck-border rounded-duck">
                 <Braces size={14} />
                 {t("output.title")}
-              </div>
+              </h2>
 
               {jsonOutput && (
                 <div className="flex items-center gap-2">
@@ -922,6 +928,7 @@ const App = () => {
                         placeholder={t("output.filter")}
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
+                        aria-label="Search JSON output"
                         className="h-9 min-w-[60px] flex-1 pl-2 pr-1 text-xs font-mono text-duck-text focus:outline-none bg-transparent disabled:text-duck-text/40"
                         disabled={isSearchDisabled}
                       />
@@ -1039,6 +1046,7 @@ const App = () => {
             {jsonOutput && viewMode === ViewMode.RAW && (
               <textarea
                 readOnly
+                aria-label="JSON output"
                 className="w-full h-full bg-transparent font-mono text-xs leading-5 text-duck-text focus:outline-none resize-none"
                 value={
                   isCompact
