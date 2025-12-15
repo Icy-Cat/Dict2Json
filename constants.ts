@@ -30,12 +30,7 @@ export const DEMO_PYTHON_DATA = `
 `;
 
 // Simulated list of other tools in your station
-export const OTHER_TOOLS = [
-  { id: "base64", name: "Base64 Encoder", icon: "🔤", path: "/base64" },
-  { id: "jwt", name: "JWT Debugger", icon: "🔑", path: "/jwt" },
-  { id: "diff", name: "Text Diff", icon: "↔️", path: "/diff" },
-  { id: "sql", name: "SQL Formatter", icon: "💾", path: "/sql" },
-];
+export const OTHER_TOOLS = [];
 
 export const TRANSLATIONS = {
   en: {
@@ -45,6 +40,7 @@ export const TRANSLATIONS = {
       localEngine: "LOCAL_ENGINE",
       docs: "DOCS",
       moreTools: "More Tools",
+      underDevelopment: "Under Development...",
       feedback: "Feedback",
     },
     input: {
@@ -92,6 +88,7 @@ export const TRANSLATIONS = {
       localEngine: "本地引擎",
       docs: "文档",
       moreTools: "更多工具",
+      underDevelopment: "开发中开发中...",
       feedback: "反馈",
     },
     input: {

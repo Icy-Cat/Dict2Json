@@ -722,27 +722,10 @@ const App = () => {
 
             {showToolsMenu && (
               <div className="absolute top-full right-0 mt-2 w-64 bg-white border border-duck-border rounded-duck shadow-[4px_4px_0px_0px_rgba(56,56,56,1)] z-50 p-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                <div className="grid grid-cols-2 gap-2">
-                  {OTHER_TOOLS.map((tool) => (
-                    <a
-                      key={tool.id}
-                      href={tool.path}
-                      className="flex flex-col items-center justify-center p-3 hover:bg-duck-bg rounded-sm border border-transparent hover:border-duck-border/20 transition-all text-center group"
-                    >
-                      <span className="text-2xl mb-1 group-hover:scale-110 transition-transform">
-                        {tool.icon}
-                      </span>
-                      <span className="text-xs font-bold text-duck-text/80">
-                        {tool.name}
-                      </span>
-                    </a>
-                  ))}
-                  <a
-                    href="/tools"
-                    className="flex flex-col items-center justify-center p-3 hover:bg-duck-bg rounded-sm border border-dashed border-duck-border/30 hover:border-duck-border/50 text-duck-text/50"
-                  >
-                    <span className="text-xs font-bold">...</span>
-                  </a>
+                <div className="p-3 text-center text-duck-text/50">
+                  <span className="text-xs font-bold">
+                    {t("nav.underDevelopment")}
+                  </span>
                 </div>
               </div>
             )}
