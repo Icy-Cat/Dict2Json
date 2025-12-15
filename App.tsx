@@ -1063,7 +1063,7 @@ const App = () => {
         <div className="flex items-center gap-6">
           {/* Feedback Link for Developer */}
           <a
-            href="mailto:support@example.com"
+            href="mailto:contact@icy-cat.com"
             className="flex items-center gap-1.5 hover:text-duck-blue transition-colors font-bold group"
           >
             <MessageSquare size={12} />
