@@ -1,4 +1,11 @@
-export default function Head() {
+import { headers } from "next/headers";
+
+export default async function Head() {
+  const headersList = await headers();
+  const host = headersList.get("host") || "dict2json.icy-cat.com";
+  const protocol = headersList.get("x-forwarded-proto") || "https";
+  const currentUrl = `${protocol}://${host}/`;
+
   return (
     <>
       <meta charSet="UTF-8" />
@@ -36,7 +43,7 @@ export default function Head() {
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://pyson.app/" />
+      <meta property="og:url" content={currentUrl} />
       <meta
         property="og:title"
         content="PySon Converter | Secure Client-Side Python to JSON Tool"
@@ -46,7 +53,7 @@ export default function Head() {
         content="Convert Python dictionaries and lists to formatted JSON instantly in your browser. No server uploads, 100% privacy."
       />
       <meta property="og:site_name" content="PySon Converter" />
-      <meta property="og:image" content="https://pyson.app/og-image.png" />
+      <meta property="og:image" content={`${currentUrl}og-image.png`} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/png" />
@@ -68,7 +75,7 @@ export default function Head() {
         name="twitter:description"
         content="Convert Python dictionaries and lists to formatted JSON instantly in your browser. No server uploads, 100% privacy."
       />
-      <meta name="twitter:image" content="https://pyson.app/og-image.png" />
+      <meta name="twitter:image" content={`${currentUrl}og-image.png`} />
       <meta
         name="twitter:image:alt"
         content="PySon Converter - Python to JSON tool"
@@ -124,9 +131,9 @@ export default function Head() {
       <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
 
       {/* Additional SEO and Performance */}
-      <link rel="alternate" hrefLang="en" href="https://pyson.app/" />
-      <link rel="alternate" hrefLang="zh" href="https://pyson.app/" />
-      <link rel="alternate" hrefLang="x-default" href="https://pyson.app/" />
+      <link rel="alternate" hrefLang="en" href={currentUrl} />
+      <link rel="alternate" hrefLang="zh" href={currentUrl} />
+      <link rel="alternate" hrefLang="x-default" href={currentUrl} />
     </>
   );
 }

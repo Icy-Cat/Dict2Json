@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pyson.app/sitemap.xml
+Sitemap: https://dict2json.icy-cat.com/sitemap.xml
