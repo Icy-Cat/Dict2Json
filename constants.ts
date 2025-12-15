@@ -88,7 +88,7 @@ export const TRANSLATIONS = {
       localEngine: "本地引擎",
       docs: "文档",
       moreTools: "更多工具",
-      underDevelopment: "开发中开发中...",
+      underDevelopment: "开发中...",
       feedback: "反馈",
     },
     input: {
