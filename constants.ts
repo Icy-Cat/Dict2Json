@@ -74,7 +74,8 @@ export const TRANSLATIONS = {
       json: "JSON",
       reportBug: "Report Bug / Request Feature",
       friendLink: "Main Site",
-      copyright: "© 2025 | icy-cat.com | All tools on this site",
+      copyrightPrefix: "© 2025 |",
+      copyrightSuffix: "All tools on this site",
     },
     node: {
       showMore: "SHOW MORE",
@@ -123,7 +124,8 @@ export const TRANSLATIONS = {
       json: "JSON",
       reportBug: "报告问题 / 功能建议",
       friendLink: "个人主站",
-      copyright: "© 2025 | icy-cat.com | 本站所有工具",
+      copyrightPrefix: "© 2025 |",
+      copyrightSuffix: "本站所有工具",
     },
     node: {
       showMore: "显示更多",

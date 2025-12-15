@@ -1062,6 +1062,18 @@ const App = () => {
       {/* Footer / Status Bar */}
       <footer className="h-8 bg-duck-bg border-t border-duck-border flex items-center justify-between px-6 text-[11px] font-mono text-duck-text/70 select-none shrink-0">
         <div className="flex items-center gap-6">
+          <span className="font-bold">
+            {t("footer.copyrightPrefix")}{" "}
+            <a
+              href="https://icy-cat.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-duck-blue"
+            >
+              icy-cat.com
+            </a>{" "}
+            | {t("footer.copyrightSuffix")}
+          </span>
           {jsonOutput ? (
             <span>{t("footer.keysFound", { count: stats.keys })}</span>
           ) : (
@@ -1092,8 +1104,6 @@ const App = () => {
               {t("footer.friendLink")}
             </span>
           </a>
-
-          <span className="text-duck-text/50">{t("footer.copyright")}</span>
 
           <div className="flex items-center gap-4 font-bold border-l border-duck-border/20 pl-4">
             {jsonOutput && <span>{(stats.size / 1024).toFixed(1)} kB</span>}
