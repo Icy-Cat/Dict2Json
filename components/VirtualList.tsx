@@ -31,6 +31,7 @@ export const VirtualList: React.FC<VirtualListProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(600); // Default fallback
+  const lastAutoScrollIndexRef = useRef<number | null>(null);
 
   // Update viewport height on resize
   useEffect(() => {
@@ -68,12 +69,18 @@ export const VirtualList: React.FC<VirtualListProps> = ({
   useEffect(() => {
     if (activeIndex == null || !containerRef.current) return;
     if (activeIndex < 0 || activeIndex >= items.length) return;
+    if (lastAutoScrollIndexRef.current === activeIndex) return;
 
+    const currentScrollTop = containerRef.current.scrollTop;
     const top = activeIndex * rowHeight;
-    if (top < scrollTop || top > scrollTop + viewportHeight - rowHeight) {
+    if (
+      top < currentScrollTop ||
+      top > currentScrollTop + viewportHeight - rowHeight
+    ) {
       containerRef.current.scrollTo({ top, behavior: "auto" });
     }
-  }, [activeIndex, items.length, rowHeight, scrollTop, viewportHeight]);
+    lastAutoScrollIndexRef.current = activeIndex;
+  }, [activeIndex, items.length, rowHeight, viewportHeight]);
 
   return (
     <div

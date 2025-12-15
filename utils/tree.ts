@@ -5,7 +5,8 @@ export interface FlatNode {
   key: string;
   value: any;
   level: number;
-  type: "object" | "array" | "primitive" | "placeholder";
+  type: "object" | "array" | "primitive" | "placeholder" | "closing";
+  parentType?: "array" | "object" | null;
   isExpanded: boolean;
   hasChildren: boolean;
   parentPath: string;
@@ -55,6 +56,7 @@ export function flattenTree(
         key: string;
         indexInParent: number;
         parentPath: string;
+        parentType: "array" | "object";
       }
     | {
         kind: "placeholder";
@@ -63,6 +65,15 @@ export function flattenTree(
         parentPath: string;
         indexInParent: number;
         placeholder: FlatNode["placeholder"];
+        parentType: "array" | "object";
+      }
+    | {
+        kind: "closing";
+        path: string;
+        level: number;
+        parentPath: string;
+        indexInParent: number;
+        bracket: "}" | "]";
       };
 
   // Initial root node
@@ -86,6 +97,7 @@ export function flattenTree(
     value: data,
     level: 0,
     type: rootType,
+    parentType: null,
     isExpanded: expandedPaths.has(rootPath),
     hasChildren: rootChildCount > 0,
     parentPath: "",
@@ -108,6 +120,9 @@ export function flattenTree(
     parentLevel: number,
     stack: StackItem[]
   ) => {
+    const parentType: "array" | "object" = Array.isArray(parentData)
+      ? "array"
+      : "object";
     const nextKeyOnActivePath = activePath
       ? getNextChildKey(parentPath, activePath)
       : null;
@@ -147,6 +162,7 @@ export function flattenTree(
           parentPath,
           indexInParent: windowEnd,
           placeholder: { kind: "hidden", hiddenCount: hiddenTail },
+          parentType,
         });
       }
 
@@ -160,6 +176,7 @@ export function flattenTree(
           key: String(i),
           indexInParent: i,
           parentPath,
+          parentType,
         });
       }
 
@@ -171,6 +188,7 @@ export function flattenTree(
           parentPath,
           indexInParent: headEnd,
           placeholder: { kind: "hidden", hiddenCount: hiddenBetween },
+          parentType,
         });
       }
 
@@ -183,6 +201,7 @@ export function flattenTree(
           key: String(i),
           indexInParent: i,
           parentPath,
+          parentType,
         });
       }
       return;
@@ -218,6 +237,7 @@ export function flattenTree(
         parentPath,
         indexInParent: windowEnd,
         placeholder: { kind: "hidden", hiddenCount: hiddenTail },
+        parentType,
       });
     }
 
@@ -231,6 +251,7 @@ export function flattenTree(
         key: k,
         indexInParent: i,
         parentPath,
+        parentType,
       });
     }
 
@@ -242,6 +263,7 @@ export function flattenTree(
         parentPath,
         indexInParent: headEnd,
         placeholder: { kind: "hidden", hiddenCount: hiddenBetween },
+        parentType,
       });
     }
 
@@ -255,11 +277,23 @@ export function flattenTree(
         key: k,
         indexInParent: i,
         parentPath,
+        parentType,
       });
     }
   };
 
   const stack: StackItem[] = [];
+  // Root also needs a closing bracket line to make indentation/structure complete.
+  if (rootType === "object" || rootType === "array") {
+    stack.push({
+      kind: "closing",
+      path: `${rootPath}#__close__`,
+      level: 0,
+      parentPath: "",
+      indexInParent: 0,
+      bracket: rootType === "array" ? "]" : "}",
+    });
+  }
   pushChildrenToStack(data, rootPath, 0, stack);
 
   while (stack.length > 0) {
@@ -289,12 +323,30 @@ export function flattenTree(
         value: null,
         level: item.level,
         type: "placeholder",
+        parentType: item.parentType,
         isExpanded: false,
         hasChildren: false,
         parentPath: item.parentPath,
         indexInParent: item.indexInParent,
         childCount: 0,
         placeholder: item.placeholder,
+      });
+      continue;
+    }
+
+    if (item.kind === "closing") {
+      result.push({
+        id: item.path,
+        key: "",
+        value: item.bracket,
+        level: item.level,
+        type: "closing",
+        parentType: null,
+        isExpanded: false,
+        hasChildren: false,
+        parentPath: item.parentPath,
+        indexInParent: item.indexInParent,
+        childCount: 0,
       });
       continue;
     }
@@ -321,6 +373,7 @@ export function flattenTree(
       value: item.data,
       level: item.level,
       type,
+      parentType: item.parentType,
       isExpanded,
       hasChildren,
       parentPath: item.parentPath,
@@ -331,6 +384,17 @@ export function flattenTree(
     result.push(node);
 
     if (isExpanded && hasChildren) {
+      // Insert a closing bracket row after children for correct visual indentation.
+      if (type === "object" || type === "array") {
+        stack.push({
+          kind: "closing",
+          path: `${item.path}#__close__`,
+          level: item.level,
+          parentPath: item.parentPath,
+          indexInParent: item.indexInParent,
+          bracket: type === "array" ? "]" : "}",
+        });
+      }
       pushChildrenToStack(item.data, item.path, item.level, stack);
     }
   }

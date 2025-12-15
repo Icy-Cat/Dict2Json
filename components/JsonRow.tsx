@@ -85,6 +85,7 @@ export const JsonRow = memo(
       value,
       level,
       type,
+      parentType,
       isExpanded,
       hasChildren,
       childCount,
@@ -115,6 +116,7 @@ export const JsonRow = memo(
 
     const renderKey = () => {
       if (key === "root" && level === 0) return null; // Don't show root key usually, or maybe "root"?
+      if (parentType === "array") return null; // Array items shouldn't show numeric index keys
       // Actually, usually root is hidden or shown as special. Let's show it if it's in the list.
 
       const keyStr = String(key);
@@ -147,6 +149,27 @@ export const JsonRow = memo(
       );
     };
 
+    // Render Closing Bracket Line
+    if (type === "closing") {
+      return (
+        <div
+          style={style}
+          className="flex items-center font-mono text-[13px] leading-6 px-1 text-duck-text"
+        >
+          <div
+            style={{
+              paddingLeft: indent,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <span className="w-4 h-4 mr-1 shrink-0" />
+            <span className="text-duck-text font-bold">{String(value)}</span>
+          </div>
+        </div>
+      );
+    }
+
     // Placeholder rows (e.g. hidden gap / truncated)
     if (type === "placeholder") {
       const message =
@@ -159,7 +182,16 @@ export const JsonRow = memo(
           style={style}
           className="flex items-center font-mono text-[13px] leading-6 px-1 text-duck-text/40 italic"
         >
-          <div style={{ paddingLeft: indent }}>{message}</div>
+          <div
+            style={{
+              paddingLeft: indent,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {level > 0 ? <span className="w-4 h-4 mr-1 shrink-0" /> : null}
+            {message}
+          </div>
         </div>
       );
     }
@@ -206,6 +238,7 @@ export const JsonRow = memo(
               width: "100%",
             }}
           >
+            {level > 0 ? <span className="w-4 h-4 mr-1 shrink-0" /> : null}
             {renderKey()}
             <span
               className={valueClass}
