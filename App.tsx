@@ -1080,6 +1080,21 @@ const App = () => {
             </span>
           </a>
 
+          {/* Friend Link to Main Site */}
+          <a
+            href="https://icy-cat.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 hover:text-duck-blue transition-colors font-bold group"
+          >
+            <ExternalLink size={12} />
+            <span className="group-hover:underline decoration-duck-blue decoration-2 underline-offset-2">
+              {t("footer.friendLink")}
+            </span>
+          </a>
+
+          <span className="text-duck-text/50">{t("footer.copyright")}</span>
+
           <div className="flex items-center gap-4 font-bold border-l border-duck-border/20 pl-4">
             {jsonOutput && <span>{(stats.size / 1024).toFixed(1)} kB</span>}
             <span>{t("footer.utf8")}</span>
