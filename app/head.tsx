@@ -18,6 +18,12 @@ export default function Head() {
         content="python to json, python dict to json, python list to json, online converter, developer tool, json formatter, local processing, secure converter"
       />
       <meta name="robots" content="index, follow" />
+      {process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION_ID && (
+        <meta
+          name="google-site-verification"
+          content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION_ID}
+        />
+      )}
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="language" content="English" />
       <meta name="author" content="PySon" />
@@ -44,7 +50,10 @@ export default function Head() {
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/png" />
-      <meta property="og:image:alt" content="PySon Converter - Python to JSON tool" />
+      <meta
+        property="og:image:alt"
+        content="PySon Converter - Python to JSON tool"
+      />
       <meta property="og:locale" content="en_US" />
 
       {/* Twitter */}
@@ -60,7 +69,10 @@ export default function Head() {
         content="Convert Python dictionaries and lists to formatted JSON instantly in your browser. No server uploads, 100% privacy."
       />
       <meta name="twitter:image" content="https://pyson.app/og-image.png" />
-      <meta name="twitter:image:alt" content="PySon Converter - Python to JSON tool" />
+      <meta
+        name="twitter:image:alt"
+        content="PySon Converter - Python to JSON tool"
+      />
 
       {/* Favicon */}
       <link
@@ -82,13 +94,13 @@ export default function Head() {
             offers: {
               "@type": "Offer",
               price: "0",
-              priceCurrency: "USD"
+              priceCurrency: "USD",
             },
             description:
               "A browser-based tool to convert Python data structures (dictionaries, lists) into valid JSON.",
             featureList:
-              "Local processing, Syntax highlighting, Tree view, Raw JSON view, Search and filter"
-          })
+              "Local processing, Syntax highlighting, Tree view, Raw JSON view, Search and filter",
+          }),
         }}
       />
 
@@ -96,7 +108,11 @@ export default function Head() {
       <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
       <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="anonymous"
+      />
 
       {/* Fonts with display=swap for better loading */}
       <link
